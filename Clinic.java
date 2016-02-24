@@ -4,10 +4,12 @@ public class Clinic {
 		
 	/**
 	* This class describes Clinic, some operations
-	* with clients and theirs pets and performs some of theese operations.
+	* with clients and theirs pets and performs some of these operations.
 	*/
 
 	private final Client[] clients;
+	
+	// Constructor
 		
 		public Clinic(final int size){
 			this.clients = new Client[size];
@@ -22,32 +24,48 @@ public class Clinic {
 		*/
 		
 		public boolean isFull(){
-			for(int i=0; i<clients.length; i++){
-				if (clients[i] == null) {return false;}
+			for(int i=0; i < clients.length; i++){
+				if (clients[i] == null) return false;
 				}
 			return true;
 		}
 		
+		public boolean isClientExist(String clientName){
+			for(int i=0; i < clients.length; i++){
+				if  (clients[i] == null) continue;
+				else if (clientName.equalsIgnoreCase(clients[i].getName())) return true;
+				}
+			return false;
+		}
+		
+		public boolean isPetExist(String petName){
+			for(int i=0; i < clients.length; i++){
+				if  (clients[i] == null) continue;
+				else if (petName.equalsIgnoreCase(clients[i].getPet().getName())) return true;
+				}
+			return false;
+		}
+		
 		public void addNewClient (final Client client){
-			for(int i=0; i<clients.length; i++){
+			for(int i=0; i < clients.length; i++){
 			if (clients[i] == null) {clients[i] = client; break;}
 			}
 		}
 		
 		public Client findClientByPetsName (final String petsName){
-			for(int i=0; i<clients.length; i++){
+			for(int i=0; i < clients.length; i++){
 			if (petsName.equalsIgnoreCase(clients[i].getPet().getName())) return clients[i];}
 			return null;
 		}
 		
 		public Pet findPetByClientsName (final String clientsName){
-			for(int i=0; i<clients.length; i++){
+			for(int i=0; i < clients.length; i++){
 			if (clientsName.equalsIgnoreCase(clients[i].getName())) return clients[i].getPet();}
 			return null;
 		}
 		
 		public void editClientsName (final String clientsOldName, final String clientsNewName){
-			for(int i=0; i<clients.length; i++){
+			for(int i=0; i < clients.length; i++){
 			if (clientsOldName.equalsIgnoreCase(clients[i].getName())) {
 				clients[i] = new Client(clientsNewName, clients[i].getPet()); 
 				break;}
@@ -55,7 +73,7 @@ public class Clinic {
 		}
 		
 		public void editPetsName (final String petsOldName, final String petsNewName){
-			for(int i=0; i<clients.length; i++){
+			for(int i=0; i < clients.length; i++){
 			if (petsOldName.equalsIgnoreCase(clients[i].getPet().getName())) {
 				clients[i].getPet().setName(petsNewName); 
 				break;}
@@ -63,7 +81,7 @@ public class Clinic {
 		}
 		
 		public void deleteClientByHisName (final String clientsName){
-			for(int i=0; i<clients.length; i++){
+			for(int i=0; i < clients.length; i++){
 			if (clientsName.equalsIgnoreCase(clients[i].getName())) {
 				clients[i] = null; 
 				break;}
@@ -71,7 +89,7 @@ public class Clinic {
 		}
 		
 		public void deleteClientByPetsName (final String petsName){
-			for(int i=0; i<clients.length; i++){
+			for(int i=0; i < clients.length; i++){
 			if (petsName.equalsIgnoreCase(clients[i].getPet().getName())) {
 				clients[i] = null; 
 				break;}
@@ -86,88 +104,96 @@ public class Clinic {
 			
 			Scanner reader = new Scanner(System.in);
 			
-			switch(choice){
 			//Add new client:
-			case "1": { 
-						if (!isFull()) {
-						System.out.print("Enter new client's name: ");
-						String clientsName = reader.next();
-						System.out.println();
-						System.out.println("Enter pet's name: ");
-						String petsName = reader.next();
-						System.out.println("Enter pet's type (dog/cat): ");
-						String petsType = reader.next();
-							if ("cat".equalsIgnoreCase(petsType)) addNewClient(new Client(clientsName, new Cat(petsName)));
-							else if ("dog".equalsIgnoreCase(petsType)) addNewClient(new Client(clientsName, new Dog(petsName)));
-							else {System.out.println("Wrong pet's type!"); break;}
-						System.out.println("New client is added.");
+			if ("1".equals(choice)) { 
+						if (isFull()) System.out.print("Clinic is full! Sorry.");
+						else {
+							System.out.print("Enter new client's name: ");
+							String clientsName = reader.next();
+							if (!isClientExist(clientsName)){
+								System.out.println();
+								System.out.println("Enter pet's name: ");
+								String petsName = reader.next();
+								if (!isPetExist(petsName)){
+									System.out.println("Enter pet's type (dog/cat): ");
+									String petsType = reader.next();
+										if ("cat".equalsIgnoreCase(petsType)) addNewClient(new Client(clientsName, new Cat(petsName)));
+										else if ("dog".equalsIgnoreCase(petsType)) addNewClient(new Client(clientsName, new Dog(petsName)));
+										else System.out.println("Wrong pet's type!");
+								}
+								else System.out.println("This pet is alredy exist.");
+							}
+							else System.out.println("This client is alredy exist.");
 						}
-						else System.out.print("Clinic is full! Sorry.");
-						break;
-						}
+						}						
 			// Find client by pet's name:
-			case "2": {
+			else if ("2".equals(choice)) {
 						System.out.print("Enter pet's name: ");
 						String petsName = reader.next();
 						System.out.println();
-						System.out.println("Client's name is " + findClientByPetsName(petsName).getName());
-						break;
+						if (isPetExist(petsName))System.out.println("Client's name is " + findClientByPetsName(petsName).getName());
+						else System.out.println("This pet doesn't exist.");
 						}
 			//Find pet by client's name:
-			case "3": {
+			else if ("3".equals(choice)) {
 						System.out.println("Enter client's name: ");
 						String clientsName = reader.next();
-						System.out.println("Pet's name is " + findPetByClientsName (clientsName).getName());
-						break;
+						if (isClientExist(clientsName)) System.out.println("Pet's name is " + findPetByClientsName (clientsName).getName());
+						else System.out.println("This client doesn't exist.");
 						}
 			//Edit client's name:
-			case "4": {
+			else if ("4".equals(choice)) {
 						System.out.println("Enter old client's name: ");
 						String clientsOldName = reader.next();
-						System.out.println("Enter new client's name: ");
-						String clientsNewName = reader.next();
-						editClientsName(clientsOldName, clientsNewName);
-						System.out.println("Client's name is changed.");
-						break;
+						if (isClientExist(clientsOldName)) {
+							System.out.println("Enter new client's name: ");
+							String clientsNewName = reader.next();
+							editClientsName(clientsOldName, clientsNewName);
+							System.out.println("Client's name is changed.");
+							}
+						else System.out.println("This client doesn't exist.");
 						}
 			//Edit pet's name: 
-			case "5": {
+			else if ("5".equals(choice)) {
 						System.out.println("Enter old pet's name: ");
 						String oldPetsName = reader.next();
-						System.out.println("Enter new pet's name: ");
-						String newPetsName = reader.next();
-						editPetsName (oldPetsName, newPetsName);
-						System.out.println("Pet's name is changed.");
-						break;
+						if (isPetExist(oldPetsName)){
+							System.out.println("Enter new pet's name: ");
+							String newPetsName = reader.next();
+							editPetsName (oldPetsName, newPetsName);
+							System.out.println("Pet's name is changed.");
+						}
+						else System.out.println("This pet doesn't exist.");
 						}
 			//Delete client by his name:
-			case "6": {
+			else if ("6".equals(choice)) {
 						System.out.println("Enter client's name: ");
 						String clientsName = reader.next();
+						if (isClientExist(clientsName)) {
 						deleteClientByHisName(clientsName);
 						System.out.println("Client is deleted.");
-						break;
 						}
-			//Delete client by pet's name:
-			case "7": {
+						else System.out.println("This client doesn't exist.");
+						}
+			else if ("7".equals(choice)) {
 						System.out.println("Enter pet's name: ");
 						String petsName = reader.next();
-						deleteClientByPetsName(petsName);
-						System.out.println("Client is deleted.");
-						break;
+						if (isPetExist(petsName)){
+							deleteClientByPetsName(petsName);
+							System.out.println("Client is deleted.");
+						}
+						else System.out.println("This pet doesn't exist.");
 						}
 			//Print all clients
-			case "8": {
-						for (int i = 0; i < 10; i++)
+			else if ("8".equals(choice)) {
+						for (int i = 0; i < clients.length; i++)
 						System.out.println(getClient(i));
-						break;
 						}
 			// Invalid enter
-			default:  {System.out.println("Invalid enter. Try again.");
-						break;
+			else  {System.out.println("Invalid enter. Try again.");
 						}
 						
-		}
-	}
-	
+			}
 }
+	
+
