@@ -17,7 +17,7 @@ public class ClinicRunner{
 		
 			System.out.println("Choice your action:");
 			System.out.println();
-			System.out.println("1 - Add new client;");
+			System.out.println("1 - Add a new client;");
 			System.out.println("2 - Find client by pet's name;");
 			System.out.println("3 - Find pet by client's name;");
 			System.out.println("4 - Edit client's name;");
