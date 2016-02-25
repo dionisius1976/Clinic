@@ -15,7 +15,7 @@ public class ClinicRunner{
 		
 		while(!quit){
 		
-			System.out.println("Choice your action:");
+			System.out.println("Choose your action:");
 			System.out.println();
 			System.out.println("1 - Add a new client;");
 			System.out.println("2 - Find client by pet's name;");
