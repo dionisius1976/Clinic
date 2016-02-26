@@ -1,3 +1,8 @@
+package ru.lesson.lessons;
+
+/**
+ * This class describes pet's type cats.
+ */
 
 public class Cat implements Pet {
 

@@ -1,5 +1,6 @@
+package ru.lesson.lessons;
 /**
-* This class describes Client
+* This class describes clients
 */
 public class Client{
 
@@ -21,7 +22,7 @@ public class Client{
 	
 	@Override
 	public String toString(){
-		return "Client "+this.getName()+". Pet is "+this.pet.toString();
+		return "Client "+this.getName()+". Client's pet is "+this.pet.toString();
 	}
 
 }

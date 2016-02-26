@@ -1,3 +1,4 @@
+package ru.lesson.lessons;
 
 public interface Pet {
 	

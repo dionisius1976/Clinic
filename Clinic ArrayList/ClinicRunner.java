@@ -1,3 +1,4 @@
+package ru.lesson.lessons;
 import java.util.Scanner;
 
 /**
@@ -26,14 +27,22 @@ public class ClinicRunner{
 			System.out.println("7 - Delete client by pet's name;");
 			System.out.println("8 - Print all clients;");
 			System.out.println("9 - Quit.");
-						
-			choice = reader.next();
-			
-			if ("9".equals(choice)) {quit = true; continue;}
-			
-			clinic.operationChoice(choice);
-			System.out.println();
-			
+
+			try {
+				choice = reader.next();
+
+				if ("9".equals(choice)) {
+					quit = true;
+					continue;
+				}
+
+				clinic.operationChoice(choice);
+				System.out.println();
+			}
+			catch (UserException e){
+				System.out.println(e.getMessage());
+				System.out.println();
+			}
 		}
 	
 	reader.close();
