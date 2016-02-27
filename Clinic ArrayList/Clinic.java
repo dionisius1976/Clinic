@@ -178,22 +178,25 @@ public class Clinic {
 						}						
 			// Find client by pet's name:
 			else if ("2".equals(choice)) {
-						System.out.print("Enter pet's name: ");
+				if (clients.isEmpty()) System.out.println("Clinic list is empty.");
+						else {System.out.print("Enter pet's name: ");
 						String petsName = reader.next();
 						System.out.println();
 						if (isPetExist(petsName))System.out.println("Client's name is " + findClientByPetsName(petsName).getName());
 						else System.out.println("Pet " + petsName + " doesn't exist. Try again.");
-						}
+						}}
 			//Find pet by client's name:
 			else if ("3".equals(choice)) {
-						System.out.println("Enter client's name: ");
+				if (clients.isEmpty()) System.out.println("Clinic list is empty.");
+						else {System.out.println("Enter client's name: ");
 						String clientsName = reader.next();
 						if (isClientExist(clientsName)) System.out.println("Pet's name is " + findPetByClientsName(clientsName).getName());
 						else System.out.println("Client " +  clientsName + " doesn't exist. Try again.");
-						}
+						}}
 			//Edit client's name:
 			else if ("4".equals(choice)) {
-						System.out.println("Enter old client's name: ");
+				if (clients.isEmpty()) System.out.println("Clinic list is empty.");
+						else {System.out.println("Enter old client's name: ");
 						String clientsOldName = reader.next();
 						if (isClientExist(clientsOldName)) {
 							System.out.println("Enter new client's name: ");
@@ -205,10 +208,11 @@ public class Clinic {
 							else System.out.println("Client " +  clientsNewName + " is already exist. Try again.");
 							}
 						else System.out.println("Client " +  clientsOldName + " doesn't exist. Try again.");
-						}
+						}}
 			//Edit pet's name: 
 			else if ("5".equals(choice)) {
-						System.out.println("Enter old pet's name: ");
+				if (clients.isEmpty()) System.out.println("Clinic list is empty.");
+						else {System.out.println("Enter old pet's name: ");
 						String oldPetsName = reader.next();
 						if (isPetExist(oldPetsName)){
 							System.out.println("Enter new pet's name: ");
@@ -220,27 +224,29 @@ public class Clinic {
 							else System.out.println("Pet " + newPetsName + " is already exist. Try again.");
 						}
 						else System.out.println("Pet " + oldPetsName + " doesn't exist. Try again.");
-						}
+						}}
 			//Delete client by his name:
 			else if ("6".equals(choice)) {
-						System.out.println("Enter client's name: ");
+				if (clients.isEmpty()) System.out.println("Clinic list is empty.");
+						else {System.out.println("Enter client's name: ");
 						String clientsName = reader.next();
 						if (isClientExist(clientsName)) {
 							deleteClientByHisName(clientsName);
 							System.out.println("Client " + clientsName + " is deleted.");
 						}
 						else System.out.println("Client " + clientsName + " doesn't exist. Try again.");
-						}
+						}}
 			//Delete client by his pet's name:
 			else if ("7".equals(choice)) {
-						System.out.println("Enter pet's name: ");
+				if (clients.isEmpty()) System.out.println("Clinic list is empty.");
+						else{System.out.println("Enter pet's name: ");
 						String petsName = reader.next();
 						if (isPetExist(petsName)){
 							deleteClientByPetsName(petsName);
 							System.out.println("Client is deleted.");
 						}
 						else System.out.println("Pet " + petsName + " doesn't exist. Try again.");
-						}
+						}}
 			//Print all clients
 			else if ("8".equals(choice)) {
 						if (clients.isEmpty()) System.out.println("Clinic list is empty.");
