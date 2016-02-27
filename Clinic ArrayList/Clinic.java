@@ -10,6 +10,9 @@ public class Clinic {
 	*/
 
 	private final ArrayList <Client> clients;
+	private final String[] menu = {"Choose your action:", "", "1 - Add a new client;", "2 - Find client by pet's name;",
+			"3 - Find pet by client's name;", "4 - Edit client's name;", "5 - Edit pet's name;", "6 - Delete client by his name;",
+			"7 - Delete client by pet's name;", "8 - Print all clients;", "9 - Quit."};
 
 	/**
 	 * Class constructor;
@@ -132,6 +135,12 @@ public class Clinic {
 			if (petsName.equalsIgnoreCase(cl.getPet().getName())) {
 				clients.remove(cl);
 				break;}
+			}
+		}
+
+		public void printMenu(){
+			for(String iter: menu){
+				System.out.println(iter);
 			}
 		}
 
