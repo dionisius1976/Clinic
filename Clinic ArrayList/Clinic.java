@@ -138,6 +138,10 @@ public class Clinic {
 			}
 		}
 
+	/**
+	 * This method prints menu of operations with cliet's list.
+	 */
+
 		public void printMenu(){
 			for(String iter: menu){
 				System.out.println(iter);
