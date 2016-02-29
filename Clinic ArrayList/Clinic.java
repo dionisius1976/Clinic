@@ -1,5 +1,6 @@
 package ru.lesson.lessons;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Clinic {
@@ -9,7 +10,7 @@ public class Clinic {
 	* with clients and their pets.
 	*/
 
-	private final ArrayList <Client> clients;
+	private final List<Client> clients;
 	private final String[] menu = {"Choose your action:", "", "1 - Add a new client;", "2 - Find client by pet's name;",
 			"3 - Find pet by client's name;", "4 - Edit client's name;", "5 - Edit pet's name;", "6 - Delete client by his name;",
 			"7 - Delete client by pet's name;", "8 - Print all clients;", "9 - Quit."};
@@ -23,14 +24,16 @@ public class Clinic {
 
 	}
 
-		public ArrayList<Client> getClients(){
-		return clients;
+		public List<Client> getClients(){
+
+			return clients;
 		}
 
 	/**
 	 * This method adds a new client to clinic list.
 	 * @param client
 	 */
+	
 		public void addClient(Client client){
 			this.clients.add(client);
 		}
@@ -159,37 +162,32 @@ public class Clinic {
 			
 			//Add new client:
 			if ("1".equals(choice)) { 
-				System.out.print("Enter new client's name: ");
-				String clientsName = reader.next();
-				if (!isClientExist(clientsName)){
-					System.out.println();
-					System.out.print("Enter pet's name: ");
-					String petsName = reader.next();
-					System.out.println();
-					if (!isPetExist(petsName)){
-						System.out.print("Enter pet's type (dog/cat): ");
-						String petsType = reader.next();
-						System.out.println();
-							if ("cat".equalsIgnoreCase(petsType)) 
-								addClient((new Client(clientsName, new Cat(petsName))));
-							else if ("dog".equalsIgnoreCase(petsType)) 
-								addClient((new Client(clientsName, new Dog(petsName))));
-							else System.out.println("Wrong pet's type! Client " 
-								+ clientsName + " is not added. Try again.");
-					}
-					else System.out.println("Pet " + petsName + " is already exist. Client " 
-						+ clientsName + " is not added. Try again.");
-				}
-				else System.out.println("Client " + clientsName + " is already exist. Try again.");
-			}						
+							System.out.print("Enter new client's name: ");
+							String clientsName = reader.next();
+							if (!isClientExist(clientsName)){
+								System.out.println();
+								System.out.print("Enter pet's name: ");
+								String petsName = reader.next();
+								System.out.println();
+								if (!isPetExist(petsName)){
+									System.out.print("Enter pet's type (dog/cat): ");
+									String petsType = reader.next();
+									System.out.println();
+										if ("cat".equalsIgnoreCase(petsType)) addClient((new Client(clientsName, new Cat(petsName))));
+										else if ("dog".equalsIgnoreCase(petsType)) addClient((new Client(clientsName, new Dog(petsName))));
+										else System.out.println("Wrong pet's type! Client " + clientsName + " is not added. Try again.");
+								}
+								else System.out.println("Pet " + petsName + " is already exist. Client " + clientsName + " is not added. Try again.");
+							}
+							else System.out.println("Client " + clientsName + " is already exist. Try again.");
+						}						
 			// Find client by pet's name:
 			else if ("2".equals(choice)) {
 				if (clients.isEmpty()) System.out.println("Clinic list is empty.");
 						else {System.out.print("Enter pet's name: ");
 						String petsName = reader.next();
 						System.out.println();
-						if (isPetExist(petsName))System.out.println("Client's name is " 
-							+ findClientByPetsName(petsName).getName());
+						if (isPetExist(petsName))System.out.println("Client's name is " + findClientByPetsName(petsName).getName());
 						else System.out.println("Pet " + petsName + " doesn't exist. Try again.");
 						}}
 			//Find pet by client's name:
@@ -198,8 +196,7 @@ public class Clinic {
 						else {System.out.print("Enter client's name: ");
 						String clientsName = reader.next();
 						System.out.println();
-						if (isClientExist(clientsName)) System.out.println("Pet's name is " 
-							+ findPetByClientsName(clientsName).getName());
+						if (isClientExist(clientsName)) System.out.println("Pet's name is " + findPetByClientsName(clientsName).getName());
 						else System.out.println("Client " +  clientsName + " doesn't exist. Try again.");
 						}}
 			//Edit client's name:
@@ -216,8 +213,7 @@ public class Clinic {
 								editClientsName(clientsOldName, clientsNewName);
 								System.out.println("Client's name is changed.");
 							}
-							else System.out.println("Client " +  clientsNewName 
-								+ " is already exist. Try again.");
+							else System.out.println("Client " +  clientsNewName + " is already exist. Try again.");
 							}
 						else System.out.println("Client " +  clientsOldName + " doesn't exist. Try again.");
 						}}
@@ -235,11 +231,9 @@ public class Clinic {
 								editPetsName (oldPetsName, newPetsName);
 								System.out.println("Pet's name is changed.");
 							}
-							else System.out.println("Pet " + newPetsName 
-								+ " is already exist. Try again.");
+							else System.out.println("Pet " + newPetsName + " is already exist. Try again.");
 						}
-						else System.out.println("Pet " + oldPetsName 
-							+ " doesn't exist. Try again.");
+						else System.out.println("Pet " + oldPetsName + " doesn't exist. Try again.");
 						}}
 			//Delete client by his name:
 			else if ("6".equals(choice)) {
