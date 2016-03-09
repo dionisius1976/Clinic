@@ -1,4 +1,5 @@
 package ru.lesson.lessons;
+
 import java.util.Scanner;
 
 /**
@@ -9,7 +10,7 @@ public class ClinicRunner{
 
 	public static void main (String[] args){
 		
-		final Clinic clinic = new Clinic();
+		final ClinicMyArrayList clinic = new ClinicMyArrayList();
 		Scanner reader = new Scanner(System.in);
 		Boolean quit = false;
 		String choice;
@@ -34,7 +35,7 @@ public class ClinicRunner{
 				System.out.println();
 			}
 		}
-	
+
 	reader.close();
 	System.out.print("Bye!");
 		
